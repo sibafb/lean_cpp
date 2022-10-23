@@ -23,6 +23,10 @@ samplefiles/
 - Execution result
 
 ```
-filesystem/build$ ./filesystem 
+filesystem/build$./filesystem 
+directory_iterator_result
+"../samplefiles/foo.json"
+recursive_directory_iterator_result
+"../samplefiles/foo/bar.json"
 "../samplefiles/foo.json"
 ```
