@@ -1,0 +1,31 @@
+## thread
+
+```
+thread.cpp
+```
+
+### thread.cpp
+
+```
+build$ ./thread 
+139940432713280 hello world
+139940432713280 hello world
+139940432713280 hello world
+139940432713280 hello world
+139940432713280 hello world
+139940424320576139940432713280 hello world
+139940432713280 hello world
+139940432713280 hello world
+139940432713280 hello world
+139940432713280 good bye world hello world
+
+139940424320576 good bye world
+139940424320576 good bye world
+139940424320576 good bye world
+139940424320576 good bye world
+139940424320576 good bye world
+139940424320576 good bye world
+139940424320576 good bye world
+139940424320576 good bye world
+139940424320576 good bye world
+```
