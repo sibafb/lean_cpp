@@ -4,7 +4,7 @@ find_package(Threads REQUIRED)
 
 project(threadClass)
 
-set(CMAKE_CXX_FLAGS "-std=c++17")
+set(CMAKE_CXX_FLAGS "-std=c++17 -pthread")
 
 add_executable(${PROJECT_NAME}
     threadClass.cpp
