@@ -4,12 +4,10 @@ on:
   push:
     branches: 
       - "main"
-      - 'fileSystemTest'
   pull_request:
     branches: [ "main" ]
 
 env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
 
 jobs:
