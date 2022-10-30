@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 3.0.2)
-
-find_package(Threads REQUIRED)
+cmake_minimum_required(VERSION 3.1.0)
 
 project(threadClass)
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -pthread")
+set(CMAKE_CXX_FLAGS "-std=c++17")
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 
 add_executable(${PROJECT_NAME}
     threadClass.cpp
 	)
 
-target_link_libraries(${PROJECT_NAME} Threads::Threads)
+target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
