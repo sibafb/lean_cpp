@@ -3,7 +3,7 @@
 #include <mutex>
 #include <iostream>
 
-class Person
+class Person final
 {
 public:
 	Person(const std::string& name, const std::string& address)
