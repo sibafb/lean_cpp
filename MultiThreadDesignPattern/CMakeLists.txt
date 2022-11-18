@@ -9,6 +9,8 @@ find_package(Threads REQUIRED)
 
 add_executable(SingleThreadExecution SingleThreadExecution.cpp)
 add_executable(Immutable Immutable.cpp)
+add_executable(GuardedSuspension GuardedSuspension.cpp)
 
 target_link_libraries(SingleThreadExecution PRIVATE Threads::Threads)
 target_link_libraries(Immutable PRIVATE Threads::Threads)
+target_link_libraries(GuardedSuspension PRIVATE Threads::Threads)

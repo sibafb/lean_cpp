@@ -1,7 +1,7 @@
 # マルチスレッドデザインパターン
 
 ##  SingleThreadExecution
-
+ - SingleThreadExecutionは単純に処理に排他を行うパターン。
  - 排他ロックがないとき
 
     ```shell
@@ -45,6 +45,30 @@
 
 ## Guarded Suspension
 
+ - Guarded　Suspensionはガード部分で停止するという意味のパターン。キューを複数のスレッドが操作するとき、キューから取り出すときの操作にガードを入れて、キューが空の場合ガードされて取り出す操作を一時停止する。キューに値が入れば再起動する。というパターン。
+ - コードではキューにリクエストを送信するClientThreadと、リクエストを受け取るServerThreadがあり、ClientThreadがキューに送信したリクエストをServerThreadが受け取る。というフローで、ServerThreadはリクエストがキューに積まれていない場合、待機状態になり、ClientThreadがリクエストを送信する（条件の変化）を待って再起動する。
+
+    ```cpp
+	Request getRequest()
+	{
+		while (m_dequeue.empty())
+		{
+			std::unique_lock<std::mutex> ul(m_mutex);
+			m_cv.wait(ul);
+		}
+		Request ret = m_dequeue.front();
+		m_dequeue.pop_front();
+		return ret;
+	}
+	void putRequest(Request request)
+	{
+		std::unique_lock<std::mutex> ul(m_mutex);
+		//サイズ制限をキュー側に設けるのが妥当だが、勉強用なので設けない
+		m_dequeue.emplace_back(request);
+		m_cv.notify_one();
+	}
+    ```
+    
 ## Balking
 
 ## Producer-Consumer
