@@ -67,7 +67,13 @@ public:
 	}
 	~ClientThread()
 	{
+	}
+	void join()
+	{
 		m_clientThread.join();
+	}
+	void detach(){
+		m_clientThread.detach();
 	}
 private:
 	std::function<void()> m_run = [this]
@@ -100,8 +106,15 @@ public:
 		 m_name(name)
 	{
 	}
-	~ServerThread(){
+	~ServerThread()
+	{
+	}
+	void join()
+	{
 		m_serverThread.join();
+	}
+	void detach(){
+		m_serverThread.detach();
 	}
 private:
 	std::function<void()> m_run = [this]
@@ -129,4 +142,7 @@ int main()
 	std::shared_ptr<RequestQueue> requestQueue = std::make_shared<RequestQueue>();
 	ClientThread clientThread(requestQueue, "Alice");
 	ServerThread serverThread(requestQueue, "Bob");
+
+	clientThread.join();
+	serverThread.join();
 }
