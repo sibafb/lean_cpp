@@ -45,7 +45,7 @@
 
 ## Guarded Suspension
 
- - Guarded　Suspensionはガード部分で停止するという意味のパターン。キューを複数のスレッドが操作するとき、キューから取り出すときの操作にガードを入れて、キューが空の場合ガードされて取り出す操作を一時停止する。キューに値が入れば再起動する。というパターン。
+ - Guarded　Suspensionは、ある条件が整うまで、スレッドの実行を停止するという意味のパターン。例として、キューを複数のスレッドが操作するとき、キューから取り出すときの操作にガードを入れて、キューが空の場合ガードされて取り出す操作を一時停止する。キューに値が入れば再起動する。などの一連の操作に取り入れられる。
  - コードではキューにリクエストを送信するClientThreadと、リクエストを受け取るServerThreadがあり、ClientThreadがキューに送信したリクエストをServerThreadが受け取る。というフローで、ServerThreadはリクエストがキューに積まれていない場合、待機状態になり、ClientThreadがリクエストを送信する（条件の変化）を待って再起動する。
 
     ```cpp
@@ -68,8 +68,34 @@
 		m_cv.notify_one();
 	}
     ```
-    
+
+- std::unique_lock<std::mutex> ul(m_mutex) はここではないといけないのだろうか
+
 ## Balking
+
+ - Balkingは複数のスレッドが重い処理を実行する前に、その処理をする必要がなければやめるというパターン。
+ - 下記の実装例では、change よって変更された部分が、saveの前に変更されたかどうかの判定が入ってからdoSaveされる。これにより、複数スレッドでdoSaveを多重に行ってしまうことを防げる。
+
+    ```cpp
+ 	void change(string newContent)
+	{
+		std::lock_guard<std::mutex> lock(m_mutex);
+		std::cout << "change newContent" <<std::endl;
+		m_content = newContent;
+		m_isChanged = true;
+	}
+	void save()
+	{
+		std::lock_guard<std::mutex> lock(m_mutex);
+		if(!m_isChanged)
+		{
+			std::cout << std::this_thread::get_id() << " balking." << std::endl;
+			return; //下の部分のdoSave処理をBalkしている。
+		}
+		doSave();
+		m_isChanged = false;
+	}
+    ```
 
 ## Producer-Consumer
 
