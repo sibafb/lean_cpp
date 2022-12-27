@@ -99,6 +99,39 @@
 
 ## Producer-Consumer
 
+ - Producer-Consumerパターンは、データの生産者と消費者をうまく回すようにするために、通信路となる中間クラスを設けるというパターン。
+ - 下記の実装例では、Tableクラスによって排他やキューのサイズ制限が行われているために、Tableの利用クラス（makerとeater）は特に通信路の内容を気にせずに処理が可能となっている。
+
+    ```cpp
+ 	class Table{
+ 	public:
+		
+		void put(std::string cake)
+		{
+			std::unique_lock<std::mutex> ul(m_mutex);
+			while (m_bufferMaxSize <= m_buffer.size())
+			{
+				m_cv.wait(ul);
+			}
+			std::cout<< std::this_thread::get_id() <<"put."<<std::endl;
+			m_buffer.emplace_back(cake);
+			m_cv.notify_all();
+		}
+		std::string take()
+		{
+			std::unique_lock<std::mutex> ul(m_mutex);
+			while (m_buffer.empty())
+			{
+				m_cv.wait(ul);
+			}
+			std::cout<< std::this_thread::get_id() <<"take."<<std::endl;
+			std::string front = m_buffer.front();
+			m_buffer.pop_front();
+			m_cv.notify_all();
+			return front;
+		}
+ ```
+
 ## Read-Writes Lock
 
 ## Thread-Per-Message
