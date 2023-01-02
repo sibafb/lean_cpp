@@ -16,3 +16,4 @@ add_executable(problem18 problem18.cpp)
 add_executable(problem19 problem19.cpp)
 # add_executable(problem20 problem20.cpp) ##cannot build for find function.
 add_executable(problem22 problem22.cpp)
+add_executable(problem23 problem23.cpp)
