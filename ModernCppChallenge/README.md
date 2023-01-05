@@ -51,4 +51,11 @@ https://zenn.dev/acd1034/articles/221118-monadic-operation-for-optional
 isdigit,isnumalpha,isupper,islowerなどが含まれる。
 https://cplusplus.com/reference/cctype/
 
-###  
+### std::char_trait
+
+https://cpprefjp.github.io/reference/string/char_traits.html
+
+### 正規表現の学習
+
+https://www-creators.com/archives/4278#:~:text=%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE%EF%BC%88%E3%81%9B%E3%81%84%E3%81%8D%E3%81%B2%E3%82%87%E3%81%86%E3%81%92%E3%82%93,%E8%A1%A8%E7%8F%BE%E3%81%99%E3%82%8B%E8%A8%98%E8%BF%B0%E6%96%B9%E6%B3%95%E3%81%A7%E3%81%99%E3%80%82
+
