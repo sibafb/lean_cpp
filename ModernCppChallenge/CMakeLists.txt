@@ -6,8 +6,8 @@ set(CMAKE_CXX_FLAGS "-std=c++17")
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 set(LIBS_PATH "${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs")
 
-include_directories(${LIBS_PATH}/stduuid)
-
+include_directories(${LIBS_PATH}/stduuid)#38
+include_directories(${LIBS_PATH}/date/include/date)#40
 
 find_package(Threads REQUIRED)
 
@@ -37,3 +37,4 @@ add_executable(problem36 problem36.cpp)
 add_executable(problem37 problem37.cpp)
 add_executable(problem38 problem38.cpp)
 add_executable(problem39 problem39.cpp)
+add_executable(problem40 problem40.cpp)
