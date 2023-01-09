@@ -47,6 +47,8 @@ add_executable(problem57 problem57.cpp)
 add_executable(problem58 problem58.cpp)
 add_executable(problem61 problem61.cpp)
 add_executable(problem62 problem62.cpp)
+add_executable(problem63 problem63.cpp)
 
 target_link_libraries(problem61 PRIVATE Threads::Threads)
 target_link_libraries(problem62 PRIVATE Threads::Threads)
+target_link_libraries(problem63 PRIVATE Threads::Threads)
