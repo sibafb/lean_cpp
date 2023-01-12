@@ -5,9 +5,12 @@ project(ModernCppChallenge)
 set(CMAKE_CXX_FLAGS "-std=c++17")
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 set(LIBS_PATH "${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs")
+set(INCLUDE_PATH "${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/include")
 
 include_directories(${LIBS_PATH}/stduuid)#38
 include_directories(${LIBS_PATH}/date/include/date)#40
+include_directories(${LIBS_PATH}/pugixml)
+include_directories(${INCLUDE_PATH}/)
 
 find_package(Threads REQUIRED)
 
@@ -56,6 +59,7 @@ add_executable(problem68 problem68.cpp)
 add_executable(problem69 problem69.cpp)
 add_executable(problem70 problem70.cpp)
 add_executable(problem71 problem71.cpp)
+add_executable(problem73 ${LIBS_PATH}/pugixml/pugixml.cpp problem73.cpp)
 
 target_link_libraries(problem61 PRIVATE Threads::Threads)
 target_link_libraries(problem62 PRIVATE Threads::Threads)
