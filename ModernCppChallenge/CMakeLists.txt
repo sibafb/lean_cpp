@@ -11,6 +11,9 @@ include_directories(${LIBS_PATH}/stduuid)#38
 include_directories(${LIBS_PATH}/date/include/date)#40
 include_directories(${LIBS_PATH}/pugixml)
 include_directories(${LIBS_PATH}/nlohmannjson)
+include_directories(${LIBS_PATH}/sqlite)
+include_directories(${LIBS_PATH}/sqlite_modern_cpp)
+
 include_directories(${INCLUDE_PATH}/)
 
 find_package(Threads REQUIRED)
@@ -64,7 +67,7 @@ add_executable(problem73 ${LIBS_PATH}/pugixml/pugixml.cpp problem73.cpp)
 add_executable(problem74 ${LIBS_PATH}/pugixml/pugixml.cpp problem74.cpp)
 add_executable(problem75 problem75.cpp)
 add_executable(problem76 problem76.cpp)
-add_executable(problem85 problem85.cpp)
+add_executable(problem85 ${LIBS_PATH}/sqlite/sqlite3.c problem85.cpp)
 
 target_link_libraries(problem61 PRIVATE Threads::Threads)
 target_link_libraries(problem62 PRIVATE Threads::Threads)
@@ -72,3 +75,5 @@ target_link_libraries(problem63 PRIVATE Threads::Threads)
 target_link_libraries(problem64 PRIVATE Threads::Threads)
 target_link_libraries(problem65 PRIVATE Threads::Threads)
 target_link_libraries(problem66 PRIVATE Threads::Threads)
+target_link_libraries(problem85 PRIVATE Threads::Threads)
+target_link_libraries(problem85 PRIVATE dl)
