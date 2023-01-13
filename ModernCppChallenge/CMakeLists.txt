@@ -64,6 +64,7 @@ add_executable(problem73 ${LIBS_PATH}/pugixml/pugixml.cpp problem73.cpp)
 add_executable(problem74 ${LIBS_PATH}/pugixml/pugixml.cpp problem74.cpp)
 add_executable(problem75 problem75.cpp)
 add_executable(problem76 problem76.cpp)
+add_executable(problem85 problem85.cpp)
 
 target_link_libraries(problem61 PRIVATE Threads::Threads)
 target_link_libraries(problem62 PRIVATE Threads::Threads)
