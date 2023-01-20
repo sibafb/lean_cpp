@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <filesystem>
 
 #define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 
@@ -39,7 +40,7 @@ int main()
         std::cout << "SHA256: "
                   << compute_hash<CryptoPP::SHA256>(path) << std::endl;
         std::cout << "MD5: "
-                  << cpmpute_hash<CryptoPP::MD5(path) << std::endl;
+                  << compute_hash<CryptoPP::Weak1::MD5>(path) << std::endl;
     }
     catch (std::exception const & ex)
     {
