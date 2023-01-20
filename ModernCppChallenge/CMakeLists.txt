@@ -15,11 +15,15 @@ include_directories(${LIBS_PATH}/cryptopp)
 include_directories(${LIBS_PATH}/sqlite)
 include_directories(${LIBS_PATH}/sqlite_modern_cpp)
 include_directories(${LIBS_PATH}/asio/include)
+include_directories(${LIBS_PATH}/curl/include)
+include_directories(${LIBS_PATH}/curlcpp/include)
 
 add_definitions(-DCRYPTOPP_CXX11_LAMBDA)
 include_directories(${INCLUDE_PATH}/)
 
 #add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/cryptopp)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/curl)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/curlcpp)
 
 
 find_package(Threads REQUIRED)
@@ -79,6 +83,7 @@ add_executable(problem85 ${LIBS_PATH}/sqlite/sqlite3.c problem85.cpp)
 #add_executable(problem93 problem93.cpp)
 add_executable(problem96s problem96s.cpp)
 add_executable(problem96c problem96c.cpp)
+#add_executable(problem98 problem98.cpp)
 
 target_link_libraries(problem61 PRIVATE Threads::Threads)
 target_link_libraries(problem62 PRIVATE Threads::Threads)
