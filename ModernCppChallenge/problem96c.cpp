@@ -41,5 +41,5 @@ void run_client(std::string const & host, short const port)
 
 int main()
 {
-    run_client("lochalhost", 11234);
+    run_client("localhost", 11234);
 }
