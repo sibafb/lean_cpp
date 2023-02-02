@@ -30,6 +30,7 @@ find_package(Threads REQUIRED)
 
 add_executable(problem1 problem1.cpp)
 add_executable(problem2 problem2.cpp)
+add_executable(problem3 problem3.cpp)
 add_executable(problem15 problem15.cpp)
 add_executable(problem16 problem16.cpp)
 add_executable(problem17 problem17.cpp)
