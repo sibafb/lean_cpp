@@ -7,23 +7,27 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 set(LIBS_PATH "${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs")
 set(INCLUDE_PATH "${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/include")
 
+#add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/curl)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/curlcpp)
+
+include_directories(${LIBS_PATH}/curl/include)
+include_directories(${LIBS_PATH}/curlcpp/include)
 include_directories(${LIBS_PATH}/stduuid)#38
-include_directories(${LIBS_PATH}/date/include/date)#40
+include_directories(${LIBS_PATH}/date/include/date)#40 #43
+include_directories(${LIBS_PATH}/date/include) #43
 include_directories(${LIBS_PATH}/pugixml)
 include_directories(${LIBS_PATH}/nlohmannjson)
 include_directories(${LIBS_PATH}/cryptopp)
 include_directories(${LIBS_PATH}/sqlite)
 include_directories(${LIBS_PATH}/sqlite_modern_cpp)
 include_directories(${LIBS_PATH}/asio/include)
-include_directories(${LIBS_PATH}/curl/include)
-include_directories(${LIBS_PATH}/curlcpp/include)
 
 add_definitions(-DCRYPTOPP_CXX11_LAMBDA)
+add_definitions(-DINSTALL=${LIBS_PATH}/date)
 include_directories(${INCLUDE_PATH}/)
 
 #add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/cryptopp)
-#add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/curl)
-#add_subdirectory(${CMAKE_SOURCE_DIR}/The-Modern-Cpp-Challenge/libs/curlcpp)
+
 
 
 find_package(Threads REQUIRED)
@@ -58,6 +62,7 @@ add_executable(problem39 problem39.cpp)
 add_executable(problem40 problem40.cpp)
 add_executable(problem41 problem41.cpp)
 add_executable(problem42 problem42.cpp)
+add_executable(problem43 ${LIBS_PATH}/date/src/tz.cpp problem43.cpp)
 add_executable(problem45 problem45.cpp)
 add_executable(problem46 problem46.cpp)
 add_executable(problem51 problem51.cpp)
@@ -87,6 +92,7 @@ add_executable(problem96s problem96s.cpp)
 add_executable(problem96c problem96c.cpp)
 #add_executable(problem98 problem98.cpp)
 
+target_link_libraries(problem43 PRIVATE "-lcurl")
 target_link_libraries(problem61 PRIVATE Threads::Threads)
 target_link_libraries(problem62 PRIVATE Threads::Threads)
 target_link_libraries(problem63 PRIVATE Threads::Threads)

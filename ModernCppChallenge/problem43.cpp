@@ -7,49 +7,67 @@
 // 
 
 #include <iostream>
-#include <chrono>
-#include <list>
-#include <map>
-#include <format>
 #include <string>
-#include <sstream>
+#include <vector>
+#include <string_view>
+#include <iomanip>
+#include "date.h"
+#include "tz.h"
 
-static std::map<std::string, std::chrono::hours> TimeZone = 
+//書籍の回答例
+
+namespace ch = std::chrono;
+
+struct attendee
 {
-    {"TOKYO", std::chrono::hours(9)},
-    {"NEWYORK", -std::chrono::hours(14)},
-    {"BEIJING", std::chrono::hours(8)},
-    {"LONDON", std::chrono::hours(0)},
+    std::string Name;
+    date::time_zone const * Zone;
+
+    attendee(std::string_view name, std::string_view zone)
+        : Name{name.data()}, Zone(date::locate_zone(zone.data()))
+    {
+    }
 };
 
-// 打ち合わせの参加者とそのタイムゾーンのリスト
-using AtendeeTimeZone = std::pair<std::string, std::string>;
-using AttendeeTimeZones = std::list<AtendeeTimeZone>;
-
-
-void printLocalTime(const std::chrono::system_clock::time_point& meetingTime, const AttendeeTimeZones& attendeeTimeZones)
+template <class Duration, class TimeZonePtr>
+void print_meeting_times(
+    date::zoned_time<Duration, TimeZonePtr> const & time,
+    std::vector<attendee> const & attendees)
 {
+    std::cout
+        << std::left << std::setw(15) << std::setfill(' ')
+        << "Local time: "
+        << time << std::endl;
     
-    for (const auto atendeeTimeZone : attendeeTimeZones)
+    for (auto const & attendee : attendees)
     {
-        //ref : https://stackoverflow.com/questions/34857119/how-to-convert-stdchronotime-point-to-string
-        std::cout << std::format("{:%h}",(meetingTime + TimeZone[atendeeTimeZone.first])) << std::endl;
-        //std::cout << format("%D %T %Z\n", floor<std::chrono::hours>(meetingTime + TimeZone[atendeeTimeZone.first])) << std::endl;
-        //std::chrono型が<<に対応したのはC++20。
+        std::cout 
+            << std::left << std::setw(15) << std::setfill(' ')
+            << attendee.Name
+            << date::zoned_time<Duration, TimeZonePtr>(attendee.Zone, time)
+            << std::endl;
     }
 }
 
 int main()
 {
-    AttendeeTimeZones attendeeTimeZones
-    {
-        {"Bob", "TOKYO"},
-        {"Alice", "NEWYORK"},
-        {"Carol", "BEJING"},
-        {"Eve", "LONDON"}
-    }
+    std::vector<attendee> attendees{
+        attendee{ "Ildiko", "Europe/Budapest" },
+        attendee{ "Jens", "Europe/Berlin" },
+        attendee{ "Jane", "America/New_York"}
+    };
 
-    printLocalTime(system_clock::now(), attendeeTimeZones);
+    unsigned int h, m;
+    std::cout << "Hour:"; std::cin >> h;
+    std::cout << "Minutes:"; std::cin >> m;
+
+    date::year_month_day today = date::floor<date::days>(ch::system_clock::now());
+
+    auto localtime = date::zoned_time<std::chrono::minutes>(
+        date::current_zone(),
+        static_cast<date::local_days>(today) + ch::hours{ h } + ch::minutes{ m });
+
+    print_meeting_times(localtime, attendees);
 }
 
 
