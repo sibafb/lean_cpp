@@ -5,21 +5,32 @@
 
 #include <iostream>
 #include <string>
+#include <string_view>
 #include <algorithm>
 
 //recursive function
 std::string print_charactors_recursive(std::string &input)
 {
-    if (!input.empty())
+    if (input.size() >= 2)
     {
-        std::sort(std::begin(input),std::end(input));
-        char first_char = input[0];
-        std::cout<<first_char<<std::endl;
-        input.erase(0);
+        char to_remove_char = 'z' + 1;
+        int to_remove_idx = input.length() + 1;
+        for(int i = 0 ; i < input.length(); i++)
+        {
+            if(to_remove_char > input.at(i))
+            {
+                to_remove_char = input.at(i);
+                to_remove_idx = i;
+            }
+        }
+        std::cout<< input.at(to_remove_idx) <<std::endl;
+        input.erase(to_remove_idx,1);
+        // std::cout<< input <<std::endl;
         return print_charactors_recursive(input);
     }
     else{
-        return 0;
+        std::cout<<input.at(0) <<std::endl;
+        return "0";
     }
 }
 
@@ -32,30 +43,30 @@ void print_sorted_charactors(const std::string &str)
         if (output_string.empty())
         {
             output_string.insert(0, str, i, 1);
-            std::cout <<"output:" << output_string << std::endl;
+            //std::cout <<"output:" << output_string << std::endl;
             continue;
         }else
         if (output_string.at(0) > str.at(i))
         {
             output_string.insert(0, str, i, 1);
-            std::cout <<"output:" << output_string << std::endl;
+            //std::cout <<"output:" << output_string << std::endl;
             continue;
         }else
         if (output_string.back() < str.at(i))
         {
             output_string.insert(output_string.length(), str, i, 1);
-            std::cout <<"output:" << output_string << std::endl;
+            //std::cout <<"output:" << output_string << std::endl;
             continue;
         }else
         {
             for(int j =1; j < output_string.length();j++)
             {
-                std::cout << "str.at(i) :" << str.at(i) << "  output_string.at(j)  :" << output_string.at(j) << std::endl; 
+                //std::cout << "str.at(i) :" << str.at(i) << "  output_string.at(j)  :" << output_string.at(j) << std::endl; 
                 if(str.at(i) < output_string.at(j))
                 {
-                    std::cout << "hit ! str.at(i) :" << str.at(i) << "  output_string.at(j)  :" << output_string.at(j) << std::endl; 
+                    //std::cout << "hit ! str.at(i) :" << str.at(i) << "  output_string.at(j)  :" << output_string.at(j) << std::endl; 
                     output_string.insert(j, str, i, 1);
-                    std::cout <<"output:" << output_string << std::endl;
+                    //std::cout <<"output:" << output_string << std::endl;
                     break;
                 }
             }
@@ -64,11 +75,24 @@ void print_sorted_charactors(const std::string &str)
     std::cout <<"output:" << output_string << std::endl;
 }
 
+// answer
+void print_permutation(std::string str)
+{
+    std::sort(std::begin(str), std::end(str));
+
+    do
+    {
+        std::cout << str << std::endl;
+    } while (std::next_permutation(std::begin(str),std::end(str)));
+}
+
 int main()
 {
- std::string abcde = "afbcde";
- printf("print_charactors_recursive");
- //print_charactors_recursive(abcde);
- printf("print_sorted_charactors\n");
- print_sorted_charactors("fgyuiuislruiesruiea");
+ std::string str = "afbcde";
+ std::cout << "print_charactors_recursive" << std::endl;
+ print_charactors_recursive(str);
+ std::cout << "print_sorted_charactors" << std::endl;
+ print_sorted_charactors(str.c_str());
+ 
+ print_permutation(str.c_str());
 }
