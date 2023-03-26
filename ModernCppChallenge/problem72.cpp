@@ -7,7 +7,6 @@
 
 struct discount_type
 {
-public:
     virtual double discount_percent(double const price, double const quantity) const  noexcept = 0;
     virtual ~discount_type() = default;
 };
