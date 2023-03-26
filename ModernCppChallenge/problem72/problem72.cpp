@@ -27,16 +27,16 @@ struct discount_type
 
 struct fixed_discount final : public discount_type 
 {
-    explicit fixed_discount(const double discount) noexcept : discount(discount){}
-    virtual double discount_percent(double const, double const) {return discount;}
+    explicit fixed_discount(const double discount) : discount(discount){}
+    virtual double discount_percent(double const, double const) const noexcept {return discount;}
 private:
     const double discount;
 };
 
 struct volume_discount : public discount_type
 {
-    volume_discount(double const discount, double const min_quantity) : discount(discount),min_quantity(min_quantity){}
-    virtual double discount_percent(double const price, double const quantity) { return quantity >= min_quantity ? discount : 0.0; }
+    volume_discount(double const quantity, double const discount)  : discount(discount),min_quantity(quantity){}
+    virtual double discount_percent(double const price, double const quantity) const noexcept { return quantity >= min_quantity ? discount : 0.0; }
 private:
     double const discount;
     double const min_quantity;
@@ -45,7 +45,7 @@ private:
 struct amount_discount : public discount_type
 {
     amount_discount(double const price, double const  discount) : discount(discount), min_total_price(price) {}
-    virtual double discount_percent(double const price, double const discount) { return price >= min_total_price ? discount : 0.0; }
+    virtual double discount_percent(double const price, double const) const noexcept { return price >= min_total_price ? discount : 0.0; }
 private:
     double const discount;
     double const min_total_price;
@@ -54,7 +54,7 @@ private:
 struct price_discount : public discount_type
 {
     price_discount(const double &price , const double & discount) : discount(discount),min_total_price(price){}
-    virtual double discount_percent(double const price, double const quantity) { return quantity * price >= min_total_price ? discount : 0.0; }
+    virtual double discount_percent(double const price, double const quantity) const noexcept { return quantity * price >= min_total_price ? discount : 0.0; }
 private: 
     double discount;
     double min_total_price;
@@ -151,4 +151,12 @@ int main()
     order o1 {101, &c1, {{a1, 1, nullptr}}, nullptr};
     assert(are_equal(calc.calculate_price(o1), 5));
     
+    order o3 {103, &c1, {{a2, 1, nullptr}}, nullptr};
+    assert(are_equal(calc.calculate_price(o3), 13.5));
+
+    order o6 {106, &c1, {{a3, 15, nullptr}}, nullptr};
+    assert(are_equal(calc.calculate_price(o6), 127.5));
+
+    order o9 {109, &c3, {{a2, 20, &d1}}, &d4};
+    assert(are_equal(calc.calculate_price(o9), 219.3075));
 }
