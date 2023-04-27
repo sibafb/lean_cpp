@@ -10,7 +10,7 @@
 
 #include "movies.h"
 
-static std::string const fonts_dir = R"(/usr/share/fonts)";
+static std::string const fonts_dir = R"(/usr/share/fonts/truetype/msttcorefonts/)";
 
 void print_pdf(movie_list const & movies, std::string const & path)
 {
@@ -65,26 +65,22 @@ void print_pdf(movie_list const & movies, std::string const & path)
 
         if (i == 0)
         {
-            AbstractContentContext::TextOptions const textOptions(
-                font, 26, AbstractContentContext::eGray, 0);
+            AbstractContentContext::TextOptions const textOptions(font, 26, AbstractContentContext::eGray, 0);
             
             context->WriteText(left, top + 15, "List of movies", textOptions);
         }
 
         auto textw = 0;
         {
-            AbstractContentContext::TextOptions const textOptions(
-                font, 20, AbstractContentContext::eGray, 0);
+            AbstractContentContext::TextOptions const textOptions(font, 20, AbstractContentContext::eGray, 0);
             
-            context->WriteText(left, top - 20 - line_height * index,
-                                    movies[i].title, textOptions);
+            context->WriteText(left, top - 20 - line_height * index, movies[i].title, textOptions);
             auto textDimensions = font->CalculateTextDimensions(movies[i].title, 20);
             textw = textDimensions.width;
         }
 
         {
-            AbstractContentContext::TextOptions const textOptions(
-                font, 16, AbstractContentContext::eGray, 0);
+            AbstractContentContext::TextOptions const textOptions(font, 16, AbstractContentContext::eGray, 0);
 
             context->WriteText(left + textw + 5, top - 20 -line_height * index,
                 " (" + std::to_string(movies[i].year) + ")",
