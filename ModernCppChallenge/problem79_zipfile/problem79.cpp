@@ -49,6 +49,14 @@ std::vector<std::string> find_in_archive(
 
 int main()
 {
+    auto results = find_in_archive("sample79.zip", R"(^.*\.jpg$)");
+
+    for( auto const & name : results)
+    {
+        std::cout << name << std::endl;
+    }
+
+    /*
     std::string archivepath;
     std::cout << "Archive path:";
     std::cin >> archivepath;
@@ -62,5 +70,5 @@ int main()
     for (auto const & name : find_in_archive(archivepath, pattern))
     {
         std::cout << name << std::endl;
-    }
+    }*/
 }
