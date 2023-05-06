@@ -14,3 +14,8 @@
 ## [ModernCppChallenge](/ModernCppChallenge)
 
 - Marius Bancila 他 Modern C++チャレンジ を参考にC++17-20で書かれたC++の学習をする。
+
+## [ToolTips](/ToolTips)
+
+- C++を使用するうえで欠かせないツール類のメモやTipsを残す。
+- CMake,GDB,各種自動ツールなどを記載する。
