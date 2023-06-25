@@ -12,13 +12,14 @@ include_directories(${LIBS_PATH}/PDF-Writer/ZLib)
 include_directories(${LIBS_PATH}/PDF-Writer/FreeType/include)
 include_directories(${LIBS_PATH}/PNGWriter)
 
-add_subdirectory(${LIBS_PATH}/ZipLib ZipLib)
+add_subdirectory(${LIBS_PATH}/PDF-Writer PDF-Writer)
+add_subdirectory(${LIBS_PATH}/PNGWriter PNGWriter)
 
 add_executable(problem82 problem82.cpp)
 
 target_link_libraries(problem82 LibPng)
 target_link_libraries(problem82 Zlib)
 target_link_libraries(problem82 FreeType)
-target_link_libraries(problem82 PNGWriter)
+target_link_libraries(problem82 PngWriter)
 
 
