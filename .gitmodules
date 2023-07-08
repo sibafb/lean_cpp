@@ -1,6 +1,6 @@
-[submodule "ModernCppChallenge/The-Modern-Cpp-Challenge"]
-	path = ModernCppChallenge/The-Modern-Cpp-Challenge
-	url = https://github.com/PacktPublishing/The-Modern-Cpp-Challenge.git
 [submodule "ModernCppChallenge/fmt"]
 	path = ModernCppChallenge/fmt
 	url = https://github.com/fmtlib/fmt.git
+[submodule "ModernCppChallenge/The-Modern-Cpp-Challenge"]
+	path = ModernCppChallenge/The-Modern-Cpp-Challenge
+	url = https://github.com/sibafb/The-Modern-Cpp-Challenge.git
