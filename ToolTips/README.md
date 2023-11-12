@@ -1,4 +1,30 @@
 
+## Cmake
+
+CMakeを使用したビルドは2パターン
+
+1. build ディレクトリを作成してcmake
+    ```
+    learn_cpp/ModernCppChallenge/problem77_movieTitleTopdf/build$ cmake ..
+    ```
+    ```
+    make -j4 #オプションは適切なものを選ぶ
+    ```
+1. cmake のbuildコマンドを使用してbuild
+    ```
+    cmake -S ./ -B ./build/ # ./がCMakeFileの場所 
+    ```
+    ```
+    cmake --build ./build/
+    ```
+
+## git の多用コマンド(ブランクが空いたときの備忘)
+
+1. git のブランチ削除
+    ```
+    git branch -d /branchName
+    ```
+
 ## GDBの使用方法
  本来は[ドキュメント](https://www.sourceware.org/gdb/documentation/)を見るべきだが備忘のため。
 - ビルド時のオプションで
