@@ -25,7 +25,7 @@ bool hasSexyPrimeNumber(uint32_t lower_prime_number)
 
 void listSexyPrimeNumber(std::vector<uintPair>& sexyPrimeNumberList, uint32_t max_num)
 {
-    if(sexyPrimeNumberList.empty())
+    if(!sexyPrimeNumberList.empty())
         std::cout << "warn : sexyPrimeNumber list is not empty";
     
     uint32_t currentNum;
